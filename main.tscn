@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://mgodog43x1ts"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_my75v"]
+[ext_resource type="Script" path="res://Button.gd" id="2_21vu8"]
+[ext_resource type="PackedScene" uid="uid://c2eh5cyvfg87e" path="res://bg.tscn" id="3_5jeeb"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_my75v")
+
+[node name="Play" type="Button" parent="."]
+offset_left = 430.0
+offset_top = 104.0
+offset_right = 708.0
+offset_bottom = 265.0
+text = "Play"
+script = ExtResource("2_21vu8")
+
+[node name="Quit" type="Button" parent="."]
+offset_left = 433.0
+offset_top = 327.0
+offset_right = 712.0
+offset_bottom = 503.0
+tooltip_text = "This is a "
+text = "Quit"
+
+[node name="BG" parent="." instance=ExtResource("3_5jeeb")]
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Play" to="Play" method="_on_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

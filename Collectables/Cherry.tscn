@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=3 uid="uid://ba4a5nv16npqp"]
+
+[ext_resource type="Texture2D" uid="uid://ctos8dao6nfbs" path="res://Sunny-land-files/Sunny-land-files/Graphical Assets/spritesheets/cherry.png" id="1_ai8f3"]
+
+[sub_resource type="GDScript" id="GDScript_o2wgi"]
+script/source = "extends Area2D
+
+
+
+
+func _on_body_entered(body):
+	if body.name == \"Player\":
+		Game.gold += 10
+		var tween = get_tree().create_tween()
+		var tween1 = get_tree().create_tween()
+		tween.tween_property(self, \"position\", position - Vector2(0,15), 0.3)
+		tween1.tween_property(self, \"modulate:a\", 0, 0.3)
+		tween.tween_callback(queue_free)
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ir41o"]
+radius = 7.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2nt2f"]
+atlas = ExtResource("1_ai8f3")
+region = Rect2(0, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_26uvg"]
+atlas = ExtResource("1_ai8f3")
+region = Rect2(21, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkxbk"]
+atlas = ExtResource("1_ai8f3")
+region = Rect2(42, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6m40s"]
+atlas = ExtResource("1_ai8f3")
+region = Rect2(63, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ys6e"]
+atlas = ExtResource("1_ai8f3")
+region = Rect2(84, 0, 21, 21)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b06va"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2nt2f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_26uvg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hkxbk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6m40s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ys6e")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="cherry" type="Area2D"]
+script = SubResource("GDScript_o2wgi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+shape = SubResource("CircleShape2D_ir41o")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_b06va")
+animation = &"Idle"
+autoplay = "Idle"
+frame = 4
+frame_progress = 0.446756
+metadata/_edit_lock_ = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
